@@ -10,7 +10,6 @@ public class WallsDetected : MonoBehaviour
         if (other.TryGetComponent<Tilemap>(out _))
         {
             _wallCount++;
-            Debug.Log(_wallCount);
         }
     }
 

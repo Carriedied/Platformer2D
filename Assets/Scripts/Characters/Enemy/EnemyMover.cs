@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Flipper))]
+
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speedX;
@@ -9,6 +10,7 @@ public class EnemyMover : MonoBehaviour
 
     private Rigidbody2D _physicalProperty;
     private Flipper _flipper;
+    
 
     private Vector2 _movement;
 
@@ -27,10 +29,5 @@ public class EnemyMover : MonoBehaviour
         Vector2 newPosition = _physicalProperty.position + _movement;
 
         _physicalProperty.MovePosition(newPosition);
-    }
-
-    public void Attack(Penguin player)
-    {
-        player.TakeDamage(_impactForce);
     }
 }

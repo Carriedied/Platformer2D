@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAnimator))]
 [RequireComponent(typeof(EnemyAttackZone))]
 [RequireComponent(typeof(VisiblePlayer))]
+[RequireComponent(typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private WallsDetected _wallsDetector;
@@ -16,7 +17,7 @@ public class Enemy : MonoBehaviour
     private EnemyMover _enemyMover;
     private EnemyAnimator _enemyAnimator;
     private EnemyAttackZone _enemyAttackZone;
-    private VisiblePlayer _visiblePlayer;
+    private EnemyAttacker _enemyAttacker;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class Enemy : MonoBehaviour
         _enemyMover = GetComponent<EnemyMover>();
         _enemyAnimator = GetComponent<EnemyAnimator>();
         _enemyAttackZone = GetComponent<EnemyAttackZone>();
-        _visiblePlayer = GetComponent<VisiblePlayer>();
+        _enemyAttacker = GetComponent<EnemyAttacker>();
     }
 
     private void Update()
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
             if (player != null && _enemyAttackZone.GetIsAttakZone(player))
             {
                 _enemyAnimator.StartAttackAnimation();
-                _enemyMover.Attack(player);
+                _enemyAttacker.Attack(player);
             }
         }
     }

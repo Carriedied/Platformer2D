@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PenguinAnimator))]
 [RequireComponent(typeof(AttackZone))]
 [RequireComponent(typeof(HealthCharacter))]
+[RequireComponent(typeof(Attacker))]
 public class Penguin : MonoBehaviour
 {
     [SerializeField] private GroundDetector _groundDetector;
@@ -14,6 +15,7 @@ public class Penguin : MonoBehaviour
     private PenguinAnimator _playerAnimator;
     private AttackZone _attackZone;
     private HealthCharacter _healthPlayer;
+    private Attacker _attacker;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class Penguin : MonoBehaviour
         _playerAnimator = GetComponent<PenguinAnimator>();
         _attackZone = GetComponent<AttackZone>();
         _healthPlayer = GetComponent<HealthCharacter>();
+        _attacker = GetComponent<Attacker>();
     }
 
     private void FixedUpdate()
@@ -46,7 +49,8 @@ public class Penguin : MonoBehaviour
             if (opponent != null)
             {
                 _playerAnimator.StartAttackAnimation();
-                _mover.Attack(opponent);
+                _mover.AttackMove(opponent);
+                _attacker.Attack(opponent);
             }
         }
     }

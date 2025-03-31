@@ -16,7 +16,7 @@ public class AvailableCells : MonoBehaviour
         FindAvailableCorrectCells();
     }
 
-    public int CountCorrectCells()
+    public int GetCountCorrectCells()
     {
         return _availableCorrectCells.Count;
     }

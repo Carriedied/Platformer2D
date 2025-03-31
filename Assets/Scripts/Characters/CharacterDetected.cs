@@ -1,20 +1,18 @@
 using System;
-using System.ComponentModel;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CharacterDetected : MonoBehaviour
 {
     [SerializeField] private float _radiusDetected;
 
+    private Collider2D[] _characters;
+    private bool _isPlayerDetected;
+    private bool _isEnemyDetected;
+
     public event Action<Penguin> OnPlayerDetected;
     public event Action<Enemy> OnEnemyDetected;
     public event Action PlayerUndetected;
     public event Action EnemyUndetected;
-
-    private Collider2D[] _characters;
-    private bool _isPlayerDetected;
-    private bool _isEnemyDetected;
 
     private void Update()
     {

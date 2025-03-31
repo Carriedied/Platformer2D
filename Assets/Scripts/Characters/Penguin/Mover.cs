@@ -6,7 +6,6 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] private float _speedX;
     [SerializeField] private float _jumpForceY;
-    [SerializeField] private float _impactForce;
 
     private Rigidbody2D _physicalProperty;
     private Flipper _flipper;
@@ -33,11 +32,9 @@ public class Mover : MonoBehaviour
         _physicalProperty.AddForce(new Vector2(_jumpForceX, _jumpForceY), ForceMode2D.Impulse);
     }
 
-    public void Attack(Enemy opponent)
+    public void AttackMove(Enemy opponent)
     {
         float directionAttack;
-
-        opponent.TakeDamage(_impactForce);
 
         directionAttack = opponent.transform.position.x - transform.position.x;
 

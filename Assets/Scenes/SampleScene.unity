@@ -820,6 +820,10 @@ PrefabInstance:
       propertyPath: _radiusDetected
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8380054807383747719, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
+      propertyPath: _impactForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8824462892032406624, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
       propertyPath: m_Name
       value: Penguin
@@ -8642,6 +8646,10 @@ PrefabInstance:
     - target: {fileID: 2823649820664273396, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3912904549741296517, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
+      propertyPath: _impactForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3970028200565930679, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: m_LocalPosition.x
