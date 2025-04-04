@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterDetected))]
+[RequireComponent(typeof(EnemyCharacterDetected))]
 [RequireComponent(typeof(VisiblePlayer))]
 [RequireComponent(typeof(WallsDetected))]
 public class Patrol : MonoBehaviour
@@ -8,11 +8,11 @@ public class Patrol : MonoBehaviour
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _attackCooldown;
 
-    private CharacterDetected _playerDetected;
+    private EnemyCharacterDetected _playerDetected;
     private VisiblePlayer _visiblePlayer;
     private WallsDetected _wallsDetected;
 
-    private Penguin? _player;
+    private Penguin _player;
     private int _currentWaypoint = 0;
     private float _threshold = 0.2f;
     private float _lastAttackTime = 0f;
@@ -27,7 +27,7 @@ public class Patrol : MonoBehaviour
 
     private void Awake()
     {
-        _playerDetected = GetComponent<CharacterDetected>();
+        _playerDetected = GetComponent<EnemyCharacterDetected>();
         _visiblePlayer = GetComponent<VisiblePlayer>();
         _wallsDetected = GetComponent<WallsDetected>();
     }
@@ -66,11 +66,6 @@ public class Patrol : MonoBehaviour
             if (_isDetectedPlayer == true && _wallsDetected.GetIsWall())
             {
                 DefinitionPressure(_zeroMovement);
-            }
-
-            if (_isDetectedPlayer == false && _wallsDetected.GetIsWall())
-            {
-                DefinitionPressure(0);
             }
         }
     }

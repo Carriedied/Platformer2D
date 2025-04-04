@@ -4,8 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(PenguinAnimator))]
 [RequireComponent(typeof(AttackZone))]
-[RequireComponent(typeof(HealthCharacter))]
-[RequireComponent(typeof(Attacker))]
+[RequireComponent(typeof(AttackerBase))]
 public class Penguin : MonoBehaviour
 {
     [SerializeField] private GroundDetector _groundDetector;
@@ -14,8 +13,7 @@ public class Penguin : MonoBehaviour
     private InputReader _inputReader;
     private PenguinAnimator _playerAnimator;
     private AttackZone _attackZone;
-    private HealthCharacter _healthPlayer;
-    private Attacker _attacker;
+    private AttackerBase _attackerBase;
 
     private void Awake()
     {
@@ -23,8 +21,7 @@ public class Penguin : MonoBehaviour
         _inputReader = GetComponent<InputReader>();
         _playerAnimator = GetComponent<PenguinAnimator>();
         _attackZone = GetComponent<AttackZone>();
-        _healthPlayer = GetComponent<HealthCharacter>();
-        _attacker = GetComponent<Attacker>();
+        _attackerBase = GetComponent<AttackerBase>();
     }
 
     private void FixedUpdate()
@@ -45,18 +42,16 @@ public class Penguin : MonoBehaviour
         if (_inputReader.GetIsAttack() && _attackZone.GetIsPossibleAttack())
         {
             Enemy opponent = _attackZone.GetEnemy();
+            Health opponentHealth = opponent.GetComponent<Health>();
 
             if (opponent != null)
             {
                 _playerAnimator.StartAttackAnimation();
+
                 _mover.AttackMove(opponent);
-                _attacker.Attack(opponent);
+
+                _attackerBase.Attack(opponentHealth);
             }
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        _healthPlayer.TakeAwayHealth(damage);
     }
 }

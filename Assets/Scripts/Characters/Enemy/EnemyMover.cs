@@ -10,7 +10,6 @@ public class EnemyMover : MonoBehaviour
 
     private Rigidbody2D _physicalProperty;
     private Flipper _flipper;
-    
 
     private Vector2 _movement;
 

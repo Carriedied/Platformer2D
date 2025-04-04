@@ -6,14 +6,14 @@ public class Flipper : MonoBehaviour
     {
         float turnRight = 180;
         float turnLeft = 0;
-        float _indexDeterminingRotation = 0;
+        float indexDeterminingRotation = 0;
 
-        if (movement > _indexDeterminingRotation)
+        if (movement > indexDeterminingRotation)
         {
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, turnRight, transform.rotation.z));
         }
 
-        if (movement < _indexDeterminingRotation)
+        if (movement < indexDeterminingRotation)
         {
             transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, turnLeft, transform.rotation.z));
         }

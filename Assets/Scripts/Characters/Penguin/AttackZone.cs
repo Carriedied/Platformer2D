@@ -1,12 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterDetected))]
+[RequireComponent(typeof(PlayerCharacterDetected))]
 public class AttackZone : MonoBehaviour
 {
     [SerializeField] private float _attackCooldown;
 
-    private CharacterDetected _enemyDetected;
-    private Enemy? _opponent;
+    private PlayerCharacterDetected _enemyDetected;
+    private Enemy _opponent;
     private float _lastAttackTime = 0f;
     private float _timePass;
     private bool _isPossibleAttack;
@@ -14,7 +14,7 @@ public class AttackZone : MonoBehaviour
 
     private void Awake()
     {
-        _enemyDetected = GetComponent<CharacterDetected>();
+        _enemyDetected = GetComponent<PlayerCharacterDetected>();
     }
 
     private void Start()

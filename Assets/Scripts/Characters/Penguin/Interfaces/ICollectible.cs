@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Characters.Penguin.Interfaces
 {
-    internal interface ICollectible
+    public interface ICollectible
     {
-        void Accept(IVisitor visitor);
+        public void Accept(IVisitor visitor);
     }
 }

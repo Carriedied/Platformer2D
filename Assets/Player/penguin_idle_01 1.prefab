@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1574694948109113592}
   - component: {fileID: 8528708917492861369}
   - component: {fileID: 992990618967614572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,11 @@ GameObject:
   - component: {fileID: 883317896942824063}
   - component: {fileID: 1613045660579162017}
   - component: {fileID: 8716420514151852405}
-  m_Layer: 0
+  - component: {fileID: 5619547439139351528}
+  - component: {fileID: 15929763012303473}
+  - component: {fileID: 6854352008826562833}
+  - component: {fileID: 4186406147657779584}
+  m_Layer: 7
   m_Name: penguin_idle_01 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,8 +169,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -514819857
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4bd23f556fe8bd04c86b133c7b7a5f6b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -288,7 +292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedX: 3
   _jumpForceY: 5
-  _impactForce: 10
 --- !u!114 &3213368157371399338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,8 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundDetector: {fileID: 992990618967614572}
-  _radiusAttack: 1
-  _attackCooldown: 3
 --- !u!114 &538817042111202494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d319e9b6378b8340a72413a6e19d7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countMedicines: 15
 --- !u!114 &1613045660579162017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,5 +364,59 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d6414d454cf3cc48a1fcbcdea9c82b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5619547439139351528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824462892032406624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c654c7b9e47aaf5479983f208c49a000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _radiusDetected: 2
+--- !u!114 &15929763012303473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824462892032406624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c2f0cc5a6a18c42905484b35eadd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackCooldown: 3
+--- !u!114 &6854352008826562833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824462892032406624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a8f3f158f176b46ac57b7b1cc43955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _impactForce: 10
+--- !u!114 &4186406147657779584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8824462892032406624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b7902430c1302418914d2250be809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
