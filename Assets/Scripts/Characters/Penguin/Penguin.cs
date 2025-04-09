@@ -1,3 +1,4 @@
+using Assets.Scripts.Characters.Penguin.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
@@ -5,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PenguinAnimator))]
 [RequireComponent(typeof(AttackZone))]
 [RequireComponent(typeof(AttackerBase))]
-public class Penguin : MonoBehaviour
+public class Penguin : MonoBehaviour, ITarget
 {
     [SerializeField] private GroundDetector _groundDetector;
 
@@ -39,7 +40,7 @@ public class Penguin : MonoBehaviour
         if (_inputReader.GetIsJump() && _groundDetector.GetIsGround())
             _mover.Jump();
 
-        if (_inputReader.GetIsAttack() && _attackZone.GetIsPossibleAttack())
+        if (_inputReader.GetIsAttack() && _attackZone.IsPossibleAttack)
         {
             Enemy opponent = _attackZone.GetEnemy();
             Health opponentHealth = opponent.GetComponent<Health>();

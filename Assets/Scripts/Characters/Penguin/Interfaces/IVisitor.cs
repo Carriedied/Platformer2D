@@ -2,7 +2,7 @@
 {
     public interface IVisitor
     {
-        void Visit(Coin coin);
-        void Visit(MedicalKit medicalKit);
+        public void Visit(Coin coin);
+        public void Visit(MedicalKit medicalKit);
     }
 }

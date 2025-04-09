@@ -1,24 +1,26 @@
+using Assets.Scripts.Characters.Penguin.Interfaces;
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyCharacterDetected))]
 [RequireComponent(typeof(VisiblePlayer))]
 [RequireComponent(typeof(WallsDetected))]
+[RequireComponent(typeof(CharacterDetector))]
 public class Patrol : MonoBehaviour
 {
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _attackCooldown;
 
-    private EnemyCharacterDetected _playerDetected;
     private VisiblePlayer _visiblePlayer;
     private WallsDetected _wallsDetected;
+    private CharacterDetector _enemyDetected;
 
+    private ITarget _penguin;
     private Penguin _player;
     private int _currentWaypoint = 0;
     private float _threshold = 0.2f;
     private float _lastAttackTime = 0f;
     private float _timePass;
     private bool _isDetectedPlayer;
-    private bool _isVisiblePlayer;
     private bool _isPossibleAttack;
     private float _zeroMovement = 0;
 
@@ -27,16 +29,14 @@ public class Patrol : MonoBehaviour
 
     private void Awake()
     {
-        _playerDetected = GetComponent<EnemyCharacterDetected>();
         _visiblePlayer = GetComponent<VisiblePlayer>();
         _wallsDetected = GetComponent<WallsDetected>();
+        _enemyDetected = GetComponent<CharacterDetector>();
     }
 
     private void Start()
     {
         DefinitionPressure(_waypoints[_currentWaypoint].position.x);
-
-        _playerDetected.OnPlayerDetected += DetectedPlayer;
     }
 
     private void Update()
@@ -46,11 +46,13 @@ public class Patrol : MonoBehaviour
             Bypass();
         }
 
-        if (_isDetectedPlayer == true && _player != null)
-        {
-            _visiblePlayer.CheckWalls(_player);
+        _penguin = _enemyDetected.DetectTargets();
 
-            if (_visiblePlayer.GetIsGround())
+        if (_penguin is Penguin penguin)
+        {
+            _player = penguin;
+
+            if (_visiblePlayer.CheckWalls(_player))
             {
                 DefinitionPressure(_waypoints[_currentWaypoint].position.x);
 
@@ -58,15 +60,21 @@ public class Patrol : MonoBehaviour
             }
             else
             {
-                _isVisiblePlayer = true;
+                _isDetectedPlayer = true;
 
                 DefinitionPressure(_player.transform.position.x);
             }
+        }
+        else
+        {
+            _isDetectedPlayer = false;
 
-            if (_isDetectedPlayer == true && _wallsDetected.GetIsWall())
-            {
-                DefinitionPressure(_zeroMovement);
-            }
+            _player = null;
+        }
+
+        if (_isDetectedPlayer == true && _wallsDetected.GetIsWall())
+        {
+            DefinitionPressure(_zeroMovement);
         }
     }
 
@@ -85,7 +93,7 @@ public class Patrol : MonoBehaviour
         }
     }
 
-    public bool GetIsVisiblePlayer() => GetBoolAsTrigger(ref _isVisiblePlayer);
+    public bool GetIsVisiblePlayer() => GetBoolAsTrigger(ref _isDetectedPlayer);
 
     public bool GetIsPossibleAttack() => GetBoolAsTrigger(ref _isPossibleAttack);
 
@@ -121,28 +129,6 @@ public class Patrol : MonoBehaviour
     private void Bypass()
     {
         _currentWaypoint = ++_currentWaypoint % _waypoints.Length;
-
-        DefinitionPressure(_waypoints[_currentWaypoint].position.x);
-    }
-
-    private void DetectedPlayer(Penguin player)
-    {
-        _playerDetected.OnPlayerDetected -= DetectedPlayer;
-        _playerDetected.PlayerUndetected += UndetectedPlayer;
-
-        _isDetectedPlayer = true;
-
-        _player = player;
-    }
-
-    private void UndetectedPlayer()
-    {
-        _playerDetected.OnPlayerDetected += DetectedPlayer;
-        _playerDetected.PlayerUndetected -= UndetectedPlayer;
-
-        _isDetectedPlayer = false;
-
-        _player = null;
 
         DefinitionPressure(_waypoints[_currentWaypoint].position.x);
     }

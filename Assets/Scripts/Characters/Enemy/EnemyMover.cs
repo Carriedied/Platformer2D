@@ -2,11 +2,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Flipper))]
-
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speedX;
-    [SerializeField] private float _impactForce;
 
     private Rigidbody2D _physicalProperty;
     private Flipper _flipper;

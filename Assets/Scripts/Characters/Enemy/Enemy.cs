@@ -1,3 +1,4 @@
+using Assets.Scripts.Characters.Penguin.Interfaces;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAttackZone))]
 [RequireComponent(typeof(VisiblePlayer))]
 [RequireComponent(typeof(AttackerBase))]
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ITarget
 {
     [SerializeField] private WallsDetected _wallsDetector;
 
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
         if (_patrol.GetIsVisiblePlayer() && _patrol.GetIsPossibleAttack())
         {
             Penguin player = _patrol.GetPlayer();
+
             Health healthPlayer = player.GetComponent<Health>();
 
             if (player != null && _enemyAttackZone.GetIsAttakZone(player))

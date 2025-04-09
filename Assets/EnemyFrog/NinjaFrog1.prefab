@@ -102,9 +102,9 @@ GameObject:
   - component: {fileID: 694819864551458937}
   - component: {fileID: 3218653807835032686}
   - component: {fileID: 7822464284892438138}
-  - component: {fileID: 898451931561903100}
   - component: {fileID: 2258533041164460191}
   - component: {fileID: 5558890445947604796}
+  - component: {fileID: 7608629049729638611}
   m_Layer: 6
   m_Name: NinjaFrog1
   m_TagString: Untagged
@@ -303,7 +303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedX: 1.5
-  _impactForce: 10
 --- !u!114 &4082163021563134320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,22 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fba6d62c8727d3489554801b2940986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &898451931561903100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7178222906852141035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04df5753999d71c47b8bff6ebf73f46f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _radiusDetected: 3
 --- !u!114 &2258533041164460191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,3 +406,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impactForce: 10
+--- !u!114 &7608629049729638611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178222906852141035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb1f4d85689dcc43b80290c8841e0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _radiusDetected: 3

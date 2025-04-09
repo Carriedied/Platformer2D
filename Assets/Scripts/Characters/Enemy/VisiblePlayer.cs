@@ -1,11 +1,12 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class VisiblePlayer : MonoBehaviour
 {
-    private bool _isGround;
+    public bool IsGround { get; private set; }
 
-    public void CheckWalls(Penguin player)
+    public bool CheckWalls(Penguin player)
     {
         Vector2 direction = player.transform.position - transform.position;
         float distance = direction.magnitude;
@@ -16,19 +17,17 @@ public class VisiblePlayer : MonoBehaviour
 
         foreach (var hit in hits)
         {
+            if (hit.collider.TryGetComponent<Penguin>(out _))
+            {
+                return false;
+            }
+
             if (hit.collider is TilemapCollider2D)
             {
-                _isGround = true;
+                return true;
             }
         }
-    }
 
-    public bool GetIsGround() => GetBoolAsTrigger(ref _isGround);
-
-    private bool GetBoolAsTrigger(ref bool value)
-    {
-        bool localValue = value;
-        value = false;
-        return localValue;
+        return true;
     }
 }
