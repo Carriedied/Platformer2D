@@ -40,7 +40,7 @@ public class Penguin : MonoBehaviour, ITarget
         if (_inputReader.GetIsJump() && _groundDetector.GetIsGround())
             _mover.Jump();
 
-        if (_inputReader.GetIsAttack() && _attackZone.IsPossibleAttack)
+        if (_inputReader.GetIsAttack() && _attackZone.GetIsPossibleAttack())
         {
             Enemy opponent = _attackZone.GetEnemy();
             Health opponentHealth = opponent.GetComponent<Health>();

@@ -679,6 +679,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 15929763012303473, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
+      propertyPath: _attackCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1408118314235227265, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -730,6 +734,10 @@ PrefabInstance:
     - target: {fileID: 2686724473292085176, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186406147657779584, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
+      propertyPath: _health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8824462892032406624, guid: 69b23eb0231c0754f8814b1ee6bcdda8, type: 3}
       propertyPath: m_Name
@@ -3682,6 +3690,10 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[1]'
       value: 
       objectReference: {fileID: 254714704}
+    - target: {fileID: 2258533041164460191, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3912904549741296517, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: _impactForce
       value: 10
@@ -3785,6 +3797,10 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[1]'
       value: 
       objectReference: {fileID: 8911378}
+    - target: {fileID: 2258533041164460191, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3912904549741296517, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: _impactForce
       value: 10
@@ -3848,6 +3864,10 @@ PrefabInstance:
     - target: {fileID: 5319724301399968464, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558890445947604796, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
+      propertyPath: _impactForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7178222906852141035, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: m_Name
@@ -8622,6 +8642,10 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[1]'
       value: 
       objectReference: {fileID: 63165228}
+    - target: {fileID: 2258533041164460191, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3970028200565930679, guid: 46c5b054e60aeba46ba1a3ce468ec85c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.13

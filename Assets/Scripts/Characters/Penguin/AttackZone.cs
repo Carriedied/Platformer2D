@@ -13,7 +13,7 @@ public class AttackZone : MonoBehaviour
     private float _lastAttackTime = 0f;
     private float _timePass;
 
-    public bool IsPossibleAttack { get; private set; }
+    private bool _isPossibleAttack;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class AttackZone : MonoBehaviour
     private void Start()
     {
         _lastAttackTime = Time.time;
+        _timePass = Time.time;
     }
 
     private void Update()
@@ -35,7 +36,7 @@ public class AttackZone : MonoBehaviour
 
             if (Time.time >= _timePass)
             {
-                IsPossibleAttack = true;
+                _isPossibleAttack = true;
                 
                 _lastAttackTime = Time.time;
             }
@@ -45,12 +46,21 @@ public class AttackZone : MonoBehaviour
 
         if (_opponent == null)
         {
-            IsPossibleAttack = false;
+            _isPossibleAttack = false;
         }
     }
+
+    public bool GetIsPossibleAttack() => GetBoolAsTrigger(ref _isPossibleAttack);
 
     public Enemy GetEnemy()
     {
         return _ninjaFrog;
+    }
+
+    private bool GetBoolAsTrigger(ref bool value)
+    {
+        bool localValue = value;
+        value = false;
+        return localValue;
     }
 }

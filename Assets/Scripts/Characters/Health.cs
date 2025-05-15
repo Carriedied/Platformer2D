@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IDamageable
 {
+    [SerializeField] private float _health;
+
     public float CurrentHitPoints { get; private set; }
     public float MaxHitPoints { get; private set; }
 
@@ -11,7 +13,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        MaxHitPoints = 100;
+        MaxHitPoints = _health;
         CurrentHitPoints = MaxHitPoints;
     }
 
