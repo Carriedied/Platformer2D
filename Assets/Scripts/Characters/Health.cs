@@ -6,10 +6,10 @@ public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _maxHitpoints;
 
+    public event Action HealthChanged;
+
     public float CurrentHitPoints { get; private set; }
     public float MaxHitPoints { get; private set; }
-
-    public event Action OnHealthChanged;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour, IDamageable
         {
             CurrentHitPoints += countMedicines;
 
-            OnHealthChanged?.Invoke();
+            HealthChanged?.Invoke();
         }
     }
 
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour, IDamageable
         {
             CurrentHitPoints -= damage;
 
-            OnHealthChanged?.Invoke();
+            HealthChanged?.Invoke();
         }
     }
 }

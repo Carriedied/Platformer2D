@@ -9,15 +9,16 @@ public class SmoothSliderHealth : MonoBehaviour
     [SerializeField] private float _duration;
 
     private float _targetValue;
+    private Coroutine _currentCoroutine;
 
     protected virtual void OnEnable()
     {
-        _hitpoints.OnHealthChanged += UpdateUI;
+        _hitpoints.HealthChanged += UpdateUI;
     }
 
     protected virtual void OnDisable()
     {
-        _hitpoints.OnHealthChanged += UpdateUI;
+        _hitpoints.HealthChanged -= UpdateUI;
     }
 
     private void Update()
@@ -29,7 +30,12 @@ public class SmoothSliderHealth : MonoBehaviour
     {
         _targetValue = (_hitpoints.CurrentHitPoints / (float)_hitpoints.MaxHitPoints) * _smoothSlider.maxValue;
 
-        StartCoroutine(ChangeSliderValue(_smoothSlider.value, _targetValue));
+        if (_currentCoroutine != null)
+        {
+            StopCoroutine(_currentCoroutine);
+        }
+
+        _currentCoroutine = StartCoroutine(ChangeSliderValue(_smoothSlider.value, _targetValue));
     }
 
     private IEnumerator ChangeSliderValue(float startValue, float targetValue)
@@ -46,5 +52,7 @@ public class SmoothSliderHealth : MonoBehaviour
         }
 
         _smoothSlider.value = targetValue;
+
+        _currentCoroutine = null;
     }
 }
