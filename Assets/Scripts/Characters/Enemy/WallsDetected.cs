@@ -21,7 +21,7 @@ public class WallsDetected : MonoBehaviour
         }
     }
 
-    public bool GetIsWall()
+    public bool IsWall()
     {
         return _wallCount > 0;
     }

@@ -2,21 +2,32 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SmoothSliderHealth : HealthBarBase
+public class SmoothSliderHealth : MonoBehaviour
 {
+    [SerializeField] private Health _hitpoints;
     [SerializeField] private Slider _smoothSlider;
     [SerializeField] private float _duration;
 
     private float _targetValue;
+
+    protected virtual void OnEnable()
+    {
+        _hitpoints.OnHealthChanged += UpdateUI;
+    }
+
+    protected virtual void OnDisable()
+    {
+        _hitpoints.OnHealthChanged += UpdateUI;
+    }
 
     private void Update()
     {
         _smoothSlider.transform.rotation = Quaternion.identity;
     }
 
-    protected override void UpdateUI()
+    private void UpdateUI()
     {
-        _targetValue = (HitPoints.CurrentHitPoints / (float)HitPoints.MaxHitPoints) * _smoothSlider.maxValue;
+        _targetValue = (_hitpoints.CurrentHitPoints / (float)_hitpoints.MaxHitPoints) * _smoothSlider.maxValue;
 
         StartCoroutine(ChangeSliderValue(_smoothSlider.value, _targetValue));
     }

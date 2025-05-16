@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e754823c5eb4aa459dadbd49017e0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 2258533041164460191}
+  _hitpoints: {fileID: 2258533041164460191}
   _smoothSlider: {fileID: 4766196124358388267}
   _duration: 0.25
 --- !u!1 &7178222906852141035
@@ -788,6 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b7902430c1302418914d2250be809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHitpoints: 100
 --- !u!114 &5558890445947604796
 MonoBehaviour:
   m_ObjectHideFlags: 0

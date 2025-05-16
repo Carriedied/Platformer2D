@@ -21,7 +21,7 @@ public class GroundDetector : MonoBehaviour
         }  
     }
 
-    public bool GetIsGround()
+    public bool IsGround()
     {
         return _groundCount > 0;
     }

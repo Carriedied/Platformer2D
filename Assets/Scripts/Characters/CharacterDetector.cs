@@ -1,26 +1,33 @@
 using Assets.Scripts.Characters.Penguin.Interfaces;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CharacterDetector : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _radiusDetected;
 
+    private int _maxCountPerson = 5;
     private Collider2D[] _detectedColliders;
 
-    public ITarget DetectTargets()
+    private void Awake()
     {
-        _detectedColliders = Physics2D.OverlapCircleAll(transform.position, _radiusDetected, _targetMask);
+        _detectedColliders = new Collider2D[_maxCountPerson];
+    }
 
-        foreach (var collider in _detectedColliders)
+    public bool TryGetTarget(out ITarget target)
+    {
+        int colliderCount = Physics2D.OverlapCircleNonAlloc(transform.position, _radiusDetected, _detectedColliders, _targetMask);
+
+        for (int i = 0; i < colliderCount; i++)
         {
-            if (collider.TryGetComponent<ITarget>(out ITarget target))
+            if (_detectedColliders[i].TryGetComponent<ITarget>(out target))
             {
-                return target;
+                return true;
             }
         }
 
-        return null;
+        target = null;
+
+        return false;
     }
 }

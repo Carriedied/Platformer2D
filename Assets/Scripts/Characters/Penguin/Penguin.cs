@@ -37,12 +37,12 @@ public class Penguin : MonoBehaviour, ITarget
             _playerAnimator.RunAnimation(false);
         }
 
-        if (_inputReader.GetIsJump() && _groundDetector.GetIsGround())
+        if (_inputReader.GetIsJump() && _groundDetector.IsGround())
             _mover.Jump();
 
         if (_inputReader.GetIsAttack() && _attackZone.GetIsPossibleAttack())
         {
-            Enemy opponent = _attackZone.GetEnemy();
+            Enemy opponent = _attackZone.NinjaFrog;
             Health opponentHealth = opponent.GetComponent<Health>();
 
             if (opponent != null)

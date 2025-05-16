@@ -14,7 +14,6 @@ public class Patrol : MonoBehaviour
     private WallsDetected _wallsDetected;
     private CharacterDetector _enemyDetected;
 
-    private ITarget _penguin;
     private Penguin _player;
     private int _currentWaypoint = 0;
     private float _threshold = 0.2f;
@@ -46,33 +45,36 @@ public class Patrol : MonoBehaviour
             Bypass();
         }
 
-        _penguin = _enemyDetected.DetectTargets();
-
-        if (_penguin is Penguin penguin)
+        if (_enemyDetected.TryGetTarget(out ITarget target))
         {
-            _player = penguin;
-
-            if (_visiblePlayer.CheckWalls(_player))
+            if (target is Penguin penguin)
             {
-                DefinitionPressure(_waypoints[_currentWaypoint].position.x);
+                _player = penguin;
 
-                _isDetectedPlayer = false;
+                if (_visiblePlayer.CheckWalls(_player))
+                {
+                    DefinitionPressure(_waypoints[_currentWaypoint].position.x);
+                    _isDetectedPlayer = false;
+                }
+                else
+                {
+                    _isDetectedPlayer = true;
+                    DefinitionPressure(_player.transform.position.x);
+                }
             }
             else
             {
-                _isDetectedPlayer = true;
-
-                DefinitionPressure(_player.transform.position.x);
+                _isDetectedPlayer = false;
+                _player = null;
             }
         }
         else
         {
             _isDetectedPlayer = false;
-
             _player = null;
         }
 
-        if (_isDetectedPlayer == true && _wallsDetected.GetIsWall())
+        if (_isDetectedPlayer == true && _wallsDetected.IsWall())
         {
             DefinitionPressure(_zeroMovement);
         }
