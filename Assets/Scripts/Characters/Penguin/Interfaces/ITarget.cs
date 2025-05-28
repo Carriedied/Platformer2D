@@ -2,5 +2,6 @@
 {
     public interface ITarget
     {
+        public Health GetHealthComponent();
     }
 }

@@ -17,7 +17,7 @@ public class Health : MonoBehaviour, IDamageable
         CurrentHitPoints = MaxHitPoints;
     }
 
-    public void RestoreHealth(float countMedicines)
+    public void ApplyHealing(float countMedicines)
     {
         if (countMedicines > 0)
         {

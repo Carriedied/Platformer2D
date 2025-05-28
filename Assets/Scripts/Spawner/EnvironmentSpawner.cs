@@ -55,7 +55,7 @@ public class EnvironmentSpawner : MonoBehaviour
                 {
                     coin = Instantiate(_coinPrefab, positionCorrectCell, Quaternion.identity);
 
-                    coin.OnCollected += RemoveCoin;
+                    coin.Collected += RemoveCoin;
 
                     RemoveNearestCells(nextIndex, previousIndex, index);
 
@@ -66,7 +66,7 @@ public class EnvironmentSpawner : MonoBehaviour
                 {
                     medKit = Instantiate(_medKitPrefab, positionCorrectCell, Quaternion.identity);
 
-                    medKit.OnCollected += RemoveMedKit;
+                    medKit.Collected += RemoveMedKit;
 
                     RemoveNearestCells(nextIndex, previousIndex, index);
 
@@ -80,14 +80,14 @@ public class EnvironmentSpawner : MonoBehaviour
     {
         Destroy(coin.gameObject);
 
-        coin.OnCollected -= RemoveCoin;
+        coin.Collected -= RemoveCoin;
     }
 
     private void RemoveMedKit(MedicalKit medKit)
     {
         Destroy(medKit.gameObject);
 
-        medKit.OnCollected -= RemoveMedKit;
+        medKit.Collected -= RemoveMedKit;
     }
 
     private void RemoveNearestCells(int nextIndex, int previousIndex, int index)

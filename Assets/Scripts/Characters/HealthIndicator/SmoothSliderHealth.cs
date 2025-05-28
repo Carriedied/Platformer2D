@@ -21,10 +21,10 @@ public class SmoothSliderHealth : MonoBehaviour
         _hitpoints.HealthChanged -= UpdateUI;
     }
 
-    private void Update()
-    {
-        _smoothSlider.transform.rotation = Quaternion.identity;
-    }
+    //private void Update()
+    //{
+    //    _smoothSlider.transform.rotation = Quaternion.identity;
+    //}
 
     private void UpdateUI()
     {

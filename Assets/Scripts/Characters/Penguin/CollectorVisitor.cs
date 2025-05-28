@@ -22,7 +22,7 @@ namespace Assets.Scripts.Characters.Penguin
 
         public void Visit(MedicalKit medicalKit)
         {
-            _health.RestoreHealth(_countMedicines);
+            _health.ApplyHealing(_countMedicines);
         }
     }
 }

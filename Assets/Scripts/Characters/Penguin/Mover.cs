@@ -1,14 +1,13 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Flipper))]
 public class Mover : MonoBehaviour
 {
+    [SerializeField] private Flipper _flipper;
     [SerializeField] private float _speedX;
     [SerializeField] private float _jumpForceY;
 
     private Rigidbody2D _physicalProperty;
-    private Flipper _flipper;
 
     private float _jumpForceX = 0;
     private float _offsetY = 0;
@@ -17,7 +16,6 @@ public class Mover : MonoBehaviour
     private void Awake()
     {
         _physicalProperty = GetComponent<Rigidbody2D>();
-        _flipper = GetComponent<Flipper>();
     }
 
     public void Move(float direction)

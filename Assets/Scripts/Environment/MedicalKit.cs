@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MedicalKit : MonoBehaviour, ICollectible
 {
-    public event Action<MedicalKit> OnCollected;
+    public event Action<MedicalKit> Collected;
 
     public void Accept(IVisitor visitor)
     {
-        OnCollected?.Invoke(this);
+        Collected?.Invoke(this);
         visitor.Visit(this);
     }
 }

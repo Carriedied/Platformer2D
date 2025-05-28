@@ -22,9 +22,11 @@ public class InputReader : MonoBehaviour
             _isAttack = true;
     }
 
-    public bool GetIsJump() => GetBoolAsTrigger(ref _isJump);
+    public bool GetIsJump() => 
+        GetBoolAsTrigger(ref _isJump);
 
-    public bool GetIsAttack() => GetBoolAsTrigger(ref _isAttack);
+    public bool GetIsAttack() => 
+        GetBoolAsTrigger(ref _isAttack);
 
     private bool GetBoolAsTrigger(ref bool value)
     {

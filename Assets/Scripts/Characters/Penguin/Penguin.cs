@@ -3,24 +3,24 @@ using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(PenguinAnimator))]
 [RequireComponent(typeof(AttackZone))]
 [RequireComponent(typeof(AttackerBase))]
 public class Penguin : MonoBehaviour, ITarget
 {
     [SerializeField] private GroundDetector _groundDetector;
+    [SerializeField] private PenguinAnimator _playerAnimator;
 
     private Mover _mover;
     private InputReader _inputReader;
-    private PenguinAnimator _playerAnimator;
     private AttackZone _attackZone;
     private AttackerBase _attackerBase;
+
+    public bool IsDetectedEnemy { get; private set; }
 
     private void Awake()
     {
         _mover = GetComponent<Mover>();
         _inputReader = GetComponent<InputReader>();
-        _playerAnimator = GetComponent<PenguinAnimator>();
         _attackZone = GetComponent<AttackZone>();
         _attackerBase = GetComponent<AttackerBase>();
     }
@@ -40,19 +40,33 @@ public class Penguin : MonoBehaviour, ITarget
         if (_inputReader.GetIsJump() && _groundDetector.IsGround())
             _mover.Jump();
 
-        if (_inputReader.GetIsAttack() && _attackZone.GetIsPossibleAttack())
+        if (_inputReader.GetIsAttack() && IsDetectedEnemy && _attackerBase.GetIsAttack())
         {
             Enemy opponent = _attackZone.NinjaFrog;
-            Health opponentHealth = opponent.GetComponent<Health>();
 
             if (opponent != null)
             {
-                _playerAnimator.StartAttackAnimation();
+                Health opponentHealth = opponent.GetHealthComponent();
 
-                _mover.AttackMove(opponent);
+                if (opponentHealth != null)
+                {
+                    _playerAnimator.StartAttackAnimation();
 
-                _attackerBase.Attack(opponentHealth);
+                    _mover.AttackMove(opponent);
+
+                    _attackerBase.Attack(opponentHealth);
+                }
             }
         }
+    }
+
+    public void ChangeDetectedEnemy(bool isDetected)
+    {
+        IsDetectedEnemy = isDetected;
+    }
+
+    public Health GetHealthComponent()
+    {
+        return GetComponent<Health>();
     }
 }

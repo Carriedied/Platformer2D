@@ -6,7 +6,7 @@ public class VisiblePlayer : MonoBehaviour
 {
     public bool IsGround { get; private set; }
 
-    public bool CheckWalls(Penguin player)
+    public bool IsWallBetweenPlayerAndTarget(Penguin player)
     {
         Vector2 direction = player.transform.position - transform.position;
         float distance = direction.magnitude;
@@ -22,7 +22,7 @@ public class VisiblePlayer : MonoBehaviour
                 return false;
             }
 
-            if (hit.collider is TilemapCollider2D)
+            if (hit.collider is CompositeCollider2D)
             {
                 return true;
             }

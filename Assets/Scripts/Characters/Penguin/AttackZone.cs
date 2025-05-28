@@ -2,28 +2,20 @@ using Assets.Scripts.Characters.Penguin.Interfaces;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterDetector))]
+[RequireComponent(typeof(Penguin))]
 public class AttackZone : MonoBehaviour
 {
     [SerializeField] private float _attackCooldown;
 
     private CharacterDetector _enemyDetected;
-    private float _lastAttackTime = 0f;
-    private float _timePass;
-
-    private bool _isPossibleAttack;
-
+    private Penguin _player;
 
     public Enemy NinjaFrog { get; private set; }
 
     private void Awake()
     {
         _enemyDetected = GetComponent<CharacterDetector>();
-    }
-
-    private void Start()
-    {
-        _lastAttackTime = Time.time;
-        _timePass = Time.time;
+        _player = GetComponent<Penguin>();
     }
 
     private void Update()
@@ -33,28 +25,12 @@ public class AttackZone : MonoBehaviour
             if (target is Enemy enemy)
             {
                 NinjaFrog = enemy;
-
-                if (Time.time >= _timePass)
-                {
-                    _isPossibleAttack = true;
-                    _lastAttackTime = Time.time;
-                }
-
-                _timePass = _lastAttackTime + _attackCooldown;
+                _player.ChangeDetectedEnemy(true);
             }
         }
         else
         {
-            _isPossibleAttack = false;
+            _player.ChangeDetectedEnemy(false);
         }
-    }
-
-    public bool GetIsPossibleAttack() => GetBoolAsTrigger(ref _isPossibleAttack);
-
-    private bool GetBoolAsTrigger(ref bool value)
-    {
-        bool localValue = value;
-        value = false;
-        return localValue;
     }
 }

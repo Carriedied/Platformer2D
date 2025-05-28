@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class WalletPenguin : MonoBehaviour
 {
-    private int coins = 0;
+    private int _coins = 0;
 
     public void AddCoin()
     {
-        coins++;
+        _coins++;
     }
 }
