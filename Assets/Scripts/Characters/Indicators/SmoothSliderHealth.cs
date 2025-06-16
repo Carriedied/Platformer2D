@@ -11,20 +11,15 @@ public class SmoothSliderHealth : MonoBehaviour
     private float _targetValue;
     private Coroutine _currentCoroutine;
 
-    protected virtual void OnEnable()
+    private void OnEnable()
     {
         _hitpoints.HealthChanged += UpdateUI;
     }
 
-    protected virtual void OnDisable()
+    private void OnDisable()
     {
         _hitpoints.HealthChanged -= UpdateUI;
     }
-
-    //private void Update()
-    //{
-    //    _smoothSlider.transform.rotation = Quaternion.identity;
-    //}
 
     private void UpdateUI()
     {

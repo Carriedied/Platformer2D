@@ -1,19 +1,28 @@
+using Assets.Scripts.Characters.Indicators;
 using Assets.Scripts.Characters.Penguin.Interfaces;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(AttackZone))]
 [RequireComponent(typeof(AttackerBase))]
+[RequireComponent(typeof(AttackCooldown))]
+[RequireComponent(typeof(VampirismAbility))]
 public class Penguin : MonoBehaviour, ITarget
 {
     [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private PenguinAnimator _playerAnimator;
+    [SerializeField] private SmoothSliderAbility _abilitySlider;
 
     private Mover _mover;
     private InputReader _inputReader;
     private AttackZone _attackZone;
     private AttackerBase _attackerBase;
+    private AttackCooldown _attackCooldown;
+    private VampirismAbility _vampirismAbility;
+    private Enemy _opponent;
+    Health _opponentHealth;
 
     public bool IsDetectedEnemy { get; private set; }
 
@@ -23,6 +32,8 @@ public class Penguin : MonoBehaviour, ITarget
         _inputReader = GetComponent<InputReader>();
         _attackZone = GetComponent<AttackZone>();
         _attackerBase = GetComponent<AttackerBase>();
+        _attackCooldown = GetComponent<AttackCooldown>();
+        _vampirismAbility = GetComponent<VampirismAbility>();
     }
 
     private void FixedUpdate()
@@ -40,23 +51,38 @@ public class Penguin : MonoBehaviour, ITarget
         if (_inputReader.GetIsJump() && _groundDetector.IsGround())
             _mover.Jump();
 
-        if (_inputReader.GetIsAttack() && IsDetectedEnemy && _attackerBase.GetIsAttack())
+        if (IsDetectedEnemy)
         {
-            Enemy opponent = _attackZone.NinjaFrog;
+            _opponent = _attackZone.NinjaFrog;
 
-            if (opponent != null)
+            if (_opponent != null)
             {
-                Health opponentHealth = opponent.GetHealthComponent();
+                _opponentHealth = _opponent.GetHealthComponent();
 
-                if (opponentHealth != null)
+                if (_opponentHealth != null)
                 {
-                    _playerAnimator.StartAttackAnimation();
+                    if (_inputReader.GetIsAttack() && _attackCooldown.GetIsAttack())
+                    {
+                        _playerAnimator.StartAttackAnimation();
 
-                    _mover.AttackMove(opponent);
+                        _mover.AttackMove(_opponent);
 
-                    _attackerBase.Attack(opponentHealth);
+                        _attackerBase.Attack(_opponentHealth);
+
+                        _opponent = null;
+                        _opponentHealth = null;
+                    }
                 }
             }
+        }
+
+        if (_inputReader.GetIsAbilityActivated() && _attackCooldown.GetIsUseAbility())
+        {
+            _vampirismAbility.OnAbilityCompleted += EndAbilityAnimation;
+
+            _vampirismAbility.UseAbility(_opponentHealth);
+
+            _abilitySlider.StartAbilityUsage(_vampirismAbility.GetAbilityUsageTime());
         }
     }
 
@@ -68,5 +94,12 @@ public class Penguin : MonoBehaviour, ITarget
     public Health GetHealthComponent()
     {
         return GetComponent<Health>();
+    }
+
+    private void EndAbilityAnimation()
+    {
+        _vampirismAbility.OnAbilityCompleted -= EndAbilityAnimation;
+
+        _abilitySlider.StartAbilityCooldown(_attackCooldown.GetAbilityDelay());
     }
 }

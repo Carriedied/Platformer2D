@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Penguin))]
 public class AttackZone : MonoBehaviour
 {
-    [SerializeField] private float _attackCooldown;
-
     private CharacterDetector _enemyDetected;
     private Penguin _player;
 

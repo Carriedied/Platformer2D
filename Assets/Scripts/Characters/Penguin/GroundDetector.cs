@@ -9,7 +9,6 @@ public class GroundDetector : MonoBehaviour
     {
         if (other.TryGetComponent<Tilemap>(out _))
         {
-            Debug.Log("++");
             _groundCount++;
         }
     }
@@ -18,7 +17,6 @@ public class GroundDetector : MonoBehaviour
     {
         if (other.TryGetComponent<Tilemap>(out _))
         {
-            Debug.Log("--");
             _groundCount--;
         }  
     }

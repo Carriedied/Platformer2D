@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(AttackerBase))]
 [RequireComponent(typeof(MoveDirection))]
 [RequireComponent(typeof(Pursuit))]
+[RequireComponent(typeof(AttackCooldown))]
 public class Enemy : MonoBehaviour, ITarget
 {
     [SerializeField] private WallsDetected _wallsDetector;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour, ITarget
     private AttackerBase _enemyAttacker;
     private MoveDirection _moveDirection;
     private Pursuit _pursuit;
+    private AttackCooldown _attackCooldown;
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour, ITarget
         _enemyAttacker = GetComponent<AttackerBase>();
         _moveDirection = GetComponent<MoveDirection>();
         _pursuit = GetComponent<Pursuit>();
+        _attackCooldown = GetComponent<AttackCooldown>();
     }
 
     private void Update()
@@ -40,7 +43,7 @@ public class Enemy : MonoBehaviour, ITarget
             _enemyAnimator.RunAnimation(false);
         }
 
-        if (_enemyAttacker.GetIsAttack())
+        if (_attackCooldown.GetIsAttack())
         {
             Penguin player = _pursuit.GetPlayer();
 
